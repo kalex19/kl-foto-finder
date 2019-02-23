@@ -29,14 +29,15 @@ function addImgToAlbum(e) {
   var newPhoto = new Photo(imageTitle.value, imageCaption.value, e.target.result, Date.now());
     album.push(newPhoto);
     createImageCard(newPhoto);
+    newPhoto.saveToStorage(album);
 }
 
 function createImageCard(photo) {
   var imageContainer = document.querySelector('.image-card-container');
   var imageCard = `<section class="image-card" data-id="${photo.id}">
-    <h1 class="card-title">
+    <h2 class="card-title">
       ${photo.title}
-    </h1>
+    </h2>
     <img src="${photo.upload}" alt="Uploaded Image">
     <p class="card-caption">
       ${photo.caption}
