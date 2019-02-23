@@ -7,15 +7,14 @@ class Photo {
   }
 
   saveToStorage(array) {
-    localStorage.setItem('posts', JSON.stringify(array));
-    console.log(localStorage);
+    localStorage.setItem('photos', JSON.stringify(array));
   }
 
   // deleteFromStorage() {
 
   // }
 
-  // updatePhoto() {
-
-  // }
+  updatePhoto() {
+    //
+  }
 }

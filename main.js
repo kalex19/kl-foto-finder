@@ -1,9 +1,10 @@
 //QUERY SELECTORS
-var album = [];
-// var albumArr = JSON.parse(localStorage.getItem('photos')) || [];
+var album = JSON.parse(localStorage.getItem('photos')) || [];
 var addToAlbumBtn = document.querySelector('.add-to-album-btn');
 var imageTitle = document.querySelector('#title');
+var titleContent = document.getElementsByClassName('card-title');
 var imageCaption = document.querySelector('#caption');
+var captionContent = document.querySelectorAll('.card-caption');
 var photoGallery = document.querySelector('.image-card-container');
 var reader = new FileReader();
 
@@ -11,18 +12,35 @@ var reader = new FileReader();
 
 
 //EVENT LISTENERS
-// window.addEventListener('load', appendPhotos);
-addToAlbumBtn.addEventListener('click',loadImg);
+addToAlbumBtn.addEventListener('click', createURL);
+photoGallery.addEventListener('keypress', blurContent);
 
+//FUNCTIONS()
 
+window.onload = function() {
+  loadImg(album);
+  for(var i = 0; i < titleContent.length; i++) {
+    titleContent[i].addEventListener('blur', saveCardChanges);
+  }
+}
 
-//FUNCTIONS
-function loadImg() {
+function loadImg(photos) {
+  for (let i = 0; i < photos.length; i++) {
+  var newPhoto = reinstantiatePhoto(photos, i);
+    createImageCard(newPhoto);
+  }
+}
+
+function createURL(album) {
   var imgInput = document.querySelector('.choose-file-input');
   if (imgInput.files[0]) {
     reader.readAsDataURL(imgInput.files[0]); 
     reader.onload = addImgToAlbum
-  }
+  } 
+}
+
+function reinstantiatePhoto(photos, i) {
+   return new Photo(photos[i].title, photos[i].caption, photos[i].upload, photos[i].id);
 }
 
 function addImgToAlbum(e) {
@@ -34,12 +52,13 @@ function addImgToAlbum(e) {
 
 function createImageCard(photo) {
   var imageContainer = document.querySelector('.image-card-container');
-  var imageCard = `<section class="image-card" data-id="${photo.id}">
-    <h2 class="card-title">
+  var imageCard = 
+  `<section class="image-card" data-id="${photo.id}">
+    <h2 class="card-title" contenteditable>
       ${photo.title}
     </h2>
     <img src="${photo.upload}" alt="Uploaded Image">
-    <p class="card-caption">
+    <p class="card-caption" contenteditable>
       ${photo.caption}
     </p>
     <footer class=image-card-buttons>
@@ -50,22 +69,57 @@ function createImageCard(photo) {
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
 }
 
+function appendPhotos() {
+  album.forEach(function (photo) {
+    createImageCard(photo);
+  })
+}
+
+function clearFields() {
+  imageTitle.value = '';
+  imageCaption.value = '';
+}
+
+function blurContent(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    e.target.blur(); 
+  }
+}
+
+function getPhotoIndex(e) {
+    var parent = e.target.closest('.image-card')
+    var photoId = parseInt(parent.getAttribute('data-id'));
+    var index = album.findIndex(function(photo){
+      return photoId === photo.id;
+    });
+      return index;
+}
+
+function saveCardChanges(e) {
+    if (e.target.classList.contains('card-title')){
+      var index = getPhotoIndex(e);
+      var photo =  reinstantiatePhoto(album, index);
+    }
+  }
 
 
+    //create new photo obj
+    //decide if updated text is title or caption
+    //get inner text
+    //update object
+    //save to local storage
 
-
-// function appendPhotos() {
-//   imagesArr.forEach(function (photo) {
-//     photoGallery.innerHTML += `<img src=${photo.file} />`
-//   })
+// function saveContent (e) {
+//   var element = e.target;
+//   var text = e.target.textContent;
+//   var targetIdea = findIdea(e);
+//   if (element.id === 'card-title') {
+//     targetIdea.title = text;
+//   }
+//   if (element.id === 'card-body') {
+//     targetIdea.body = text;
+//   }
+//   targetIdea.updateContent();
+//   targetIdea.saveToStorage(ideas);
 // }
-
-
-
-// function addPhoto(e) {
-//   // console.log(e.target.result);
-//   var newPhoto = new Photo(Date.now(), e.target.result);
-//   photoGallery.innerHTML += `<img src=${e.target.result} />`;
-//   imagesArr.push(newPhoto)
-//   newPhoto.saveToStorage(imagesArr)
-// }```
