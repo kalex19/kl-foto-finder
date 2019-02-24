@@ -14,7 +14,12 @@ class Photo {
 
   // }
 
-  updatePhoto() {
-    //
+  updatePhoto(album) {
+    var index = album.indexOf(this)
+    album.splice(index, 1, this);
+    this.saveToStorage(album);
   }
 }
+
+
+//get cards to save to local 

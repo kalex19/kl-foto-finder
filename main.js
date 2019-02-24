@@ -1,14 +1,12 @@
 //QUERY SELECTORS
 var album = JSON.parse(localStorage.getItem('photos')) || [];
 var addToAlbumBtn = document.querySelector('.add-to-album-btn');
+var photoGallery = document.querySelector('.image-card-container');
 var imageTitle = document.querySelector('#title');
 var titleContent = document.getElementsByClassName('card-title');
 var imageCaption = document.querySelector('#caption');
 var captionContent = document.querySelectorAll('.card-caption');
-var photoGallery = document.querySelector('.image-card-container');
 var reader = new FileReader();
-
-
 
 
 //EVENT LISTENERS
@@ -22,6 +20,10 @@ window.onload = function() {
   for(var i = 0; i < titleContent.length; i++) {
     titleContent[i].addEventListener('blur', saveCardChanges);
   }
+
+  for(var i = 0; i < captionContent.length; i++) {
+    captionContent[i].addEventListener('blur', saveCardChanges);
+}
 }
 
 function loadImg(photos) {
@@ -97,29 +99,18 @@ function getPhotoIndex(e) {
 }
 
 function saveCardChanges(e) {
-    if (e.target.classList.contains('card-title')){
-      var index = getPhotoIndex(e);
-      var photo =  reinstantiatePhoto(album, index);
+    var index = getPhotoIndex(e);
+    var photo = reinstantiatePhoto(album, index);
+    if (e.target.classList.contains('card-title')) {
+      photo.title = e.target.innerText;
+    } else {
+      photo.caption = e.target.innerText;
     }
+    photo.updatePhoto(album);
   }
-
-
     //create new photo obj
     //decide if updated text is title or caption
     //get inner text
     //update object
     //save to local storage
 
-// function saveContent (e) {
-//   var element = e.target;
-//   var text = e.target.textContent;
-//   var targetIdea = findIdea(e);
-//   if (element.id === 'card-title') {
-//     targetIdea.title = text;
-//   }
-//   if (element.id === 'card-body') {
-//     targetIdea.body = text;
-//   }
-//   targetIdea.updateContent();
-//   targetIdea.saveToStorage(ideas);
-// }
