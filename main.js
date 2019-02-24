@@ -60,13 +60,13 @@ function createImageCard(photo) {
   var imageContainer = document.querySelector('.image-card-container');
   var imageCard = 
   `<section class="image-card" data-id="${photo.id}">
-    <h2 class="card-title" contenteditable>
+    <textarea class="card-title" contenteditable>
       ${photo.title}
-    </h2>
+    </textarea>
     <img src="${photo.upload}" alt="Uploaded Image">
-    <p class="card-caption" contenteditable>
+    <textarea class="card-caption" contenteditable>
       ${photo.caption}
-    </p>
+    </textarea>
     <footer class=image-card-buttons>
     <button class='delete-btn'><img src="images/delete.svg" alt="Trash Can"></button>
     <button class='active-fav-btn'><img src="" alt="Heart"

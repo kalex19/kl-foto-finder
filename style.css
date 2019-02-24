@@ -4,7 +4,7 @@
 
 body {
   display: grid;
-  grid-template-rows: 1fr 2fr 3fr;
+  grid-template-rows: 15% auto 50%;;
   font-family: 'Open Sans', sans-serif;
   background: #3E2A35;
   color: #fff;
@@ -16,6 +16,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 100px;
+  margin: 8px 40px;
 }
 
 .homepage-title {
@@ -49,8 +50,102 @@ nav {
   min-width: 400px;
 }
 
+.image-card-creator {
+  display: grid;
+  grid-auto-columns: 60% auto;
+  width: 100%;
+  justify-content: center;
+}
+
+.title-label,
+.caption-label {
+  margin: 0;
+  padding: 0;
+  height: 2px;
+  font-size: x-large;
+  color: #c7c4be;
+}
+
+.title-input,
+.caption-input {
+  margin: 35px 0px;
+  height: 65px;
+}
+
+.choose-file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.choose-file-input + label {
+  color: #fff;
+  background-color: #5b4447;
+  display: inline-block;
+  margin: 35px 0px;
+  height: 65px;
+  font-size: x-large;
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+}
 
 
+.favorite-and-trash-btn {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 50% auto;
+}
+
+.view-favorites-btn,
+.add-to-album-btn {
+  height: 65px;
+  width: 90%;
+  margin: 35px 0px;
+  background-color: #5b4447;
+  color: #fff;
+  border: 0px solid;
+}
+
+.add-to-album-btn {
+  margin-left: 40px;
+}
+
+.image-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #c2b2b4;
+}
+
+.image-card {
+  border: 1px solid #938284;
+  display: grid;
+  grid-template-rows: 15% auto 15% 20%;
+  height: 400px;
+  margin: 10px 25px;
+  color: #3e2a35;
+  background-color: #fff;
+}
+
+.card-title {
+  resize: none;
+  border: 0px solid;
+  font-weight: 700;
+  font-size: x-large;
+  margin-top: 10px;
+}
+
+.image-card img {
+  width: 100%;
+}
+
+.card-caption {
+  resize: none;
+  border: 0px solid;
+}
 
 .hide-me {
   display:none;
