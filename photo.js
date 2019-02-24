@@ -21,5 +21,3 @@ class Photo {
   }
 }
 
-
-//get cards to save to local 

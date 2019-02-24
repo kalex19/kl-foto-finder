@@ -30,3 +30,7 @@ nav {
   padding: 0px 8px;
 }
 
+.hide-me {
+  display:none;
+}
+

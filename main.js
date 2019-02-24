@@ -6,12 +6,16 @@ var imageTitle = document.querySelector('#title');
 var titleContent = document.getElementsByClassName('card-title');
 var imageCaption = document.querySelector('#caption');
 var captionContent = document.querySelectorAll('.card-caption');
+var favortiteBtn = document.querySelector('.fav-btn');
+var favortiteBtnActive = document.querySelector('.active-fav-btn');
 var reader = new FileReader();
 
 
 //EVENT LISTENERS
 addToAlbumBtn.addEventListener('click', createURL);
 photoGallery.addEventListener('keypress', blurContent);
+favortiteBtn.addEventListener('click', favoriteButton);
+favortiteBtnActive.addEventListener('click', favoriteButton);
 
 //FUNCTIONS()
 
@@ -64,8 +68,9 @@ function createImageCard(photo) {
       ${photo.caption}
     </p>
     <footer class=image-card-buttons>
-    <img src="images/delete.svg" alt="Trash Can">
-    <img src="images/favorite.svg" alt="Heart">
+    <button class='delete-btn'><img src="images/delete.svg" alt="Trash Can"></button>
+    <button class='active-fav-btn'><img src="" alt="Heart"
+    <button class='fav-btn'><img src="images/favorite.svg" alt="Heart"></button>
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
@@ -108,9 +113,12 @@ function saveCardChanges(e) {
     }
     photo.updatePhoto(album);
   }
-    //create new photo obj
-    //decide if updated text is title or caption
-    //get inner text
-    //update object
-    //save to local storage
-
+    
+function favoriteButton() {
+  var buttonActiveSwitch = document.classList('fav-btn');
+    if(buttonActiveSwitch){ element.classList.toggle('active-fav-btn')
+    }
+  var buttonDisabledSwitch = document.classList('active-fav-btn');
+     if(buttonActiveSwitch){ element.classList.toggle('fav-btn')
+    }
+}
