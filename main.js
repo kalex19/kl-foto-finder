@@ -14,8 +14,8 @@ var reader = new FileReader();
 //EVENT LISTENERS
 addToAlbumBtn.addEventListener('click', createURL);
 photoGallery.addEventListener('keypress', blurContent);
-favortiteBtn.addEventListener('click', favoriteButton);
-favortiteBtnActive.addEventListener('click', favoriteButton);
+// favortiteBtn.addEventListener('click', favoriteButton);
+// favortiteBtnActive.addEventListener('click', favoriteButton);
 
 //FUNCTIONS()
 
@@ -114,11 +114,11 @@ function saveCardChanges(e) {
     photo.updatePhoto(album);
   }
     
-function favoriteButton() {
-  var buttonActiveSwitch = document.classList('fav-btn');
-    if(buttonActiveSwitch){ element.classList.toggle('active-fav-btn')
-    }
-  var buttonDisabledSwitch = document.classList('active-fav-btn');
-     if(buttonActiveSwitch){ element.classList.toggle('fav-btn')
-    }
-}
+// function favoriteButton() {
+//   var buttonActiveSwitch = document.classList('fav-btn');
+//     if(buttonActiveSwitch){ element.classList.toggle('active-fav-btn')
+//     }
+//   var buttonDisabledSwitch = document.classList('active-fav-btn');
+//      if(buttonActiveSwitch){ element.classList.toggle('fav-btn')
+//     }
+// }
