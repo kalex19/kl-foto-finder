@@ -6,16 +6,18 @@ var imageTitle = document.querySelector('#title');
 var titleContent = document.getElementsByClassName('card-title');
 var imageCaption = document.querySelector('#caption');
 var captionContent = document.querySelectorAll('.card-caption');
-var favortiteBtn = document.querySelector('.fav-btn');
-var favortiteBtnActive = document.querySelector('.active-fav-btn');
+// var favortiteBtn = document.querySelector('.fav-btn');
+// var favortiteBtnActive = document.querySelector('.active-fav-btn');
 var reader = new FileReader();
 
 
 //EVENT LISTENERS
 addToAlbumBtn.addEventListener('click', createURL);
 photoGallery.addEventListener('keypress', blurContent);
-// favortiteBtn.addEventListener('click', favoriteButton);
-// favortiteBtnActive.addEventListener('click', favoriteButton);
+photoGallery.addEventListener('mouseover', editDeleteButton);
+photoGallery.addEventListener('mouseout', editDeleteButtonActive);
+photoGallery.addEventListener('click', removeCard);
+
 
 //FUNCTIONS()
 
@@ -60,16 +62,16 @@ function createImageCard(photo) {
   var imageContainer = document.querySelector('.image-card-container');
   var imageCard = 
   `<section class="image-card" data-id="${photo.id}">
-    <textarea class="card-title" contenteditable>
+    <textarea class="card-title" contenteditable type="text">
       ${photo.title}
     </textarea>
     <img src="${photo.upload}" alt="Uploaded Image">
-    <textarea class="card-caption" contenteditable>
+    <textarea class="card-caption" contenteditable type="text">
       ${photo.caption}
     </textarea>
-    <footer class=image-card-buttons>
-    <div class="trash-btn"></div>
-    <div class="favorite-btn"></div>
+    <footer class="image-card-buttons">
+    <div class="delete-btn-container delete-btn"></div>
+    <div class="favorite-btn-container favorite-btn"></div>
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
@@ -113,12 +115,37 @@ function saveCardChanges(e) {
     }
     photo.updatePhoto(album);
   }
-    
-// function favoriteButton() {
-//   var buttonActiveSwitch = document.classList('fav-btn');
-//     if(buttonActiveSwitch){ element.classList.toggle('active-fav-btn')
-//     }
-//   var buttonDisabledSwitch = document.classList('active-fav-btn');
-//      if(buttonActiveSwitch){ element.classList.toggle('fav-btn')
-//     }
+
+function editDeleteButton(e) {
+  if (e.target.classList.contains('delete-btn-container')) {
+    e.target.classList.add('delete-btn-active');
+    e.target.classList.remove('delete-btn'); 
+   } 
+}
+
+function editDeleteButtonActive(e) {
+  if (e.target.classList.contains('delete-btn-container')) {
+    e.target.classList.remove('delete-btn-active');
+    e.target.classList.add('delete-btn'); 
+   } 
+}
+
+function removeCard(e) {
+  console.log(e.target);
+    e.target.closest('.image-card').remove();
+}
+  //gets card id
+  //searches for id's index
+  //gets index
+  //removes index from array
 // }
+
+//function editFavoriteButton {
+ //favoriteBtn.classList.add('hide-me');
+//  favoriteBtnActive.classList.remove('hide-me'); 
+//}
+
+//function viewFavoritesButtonFunc {
+//should change inner text of button
+//}
+

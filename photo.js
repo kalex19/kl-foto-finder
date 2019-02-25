@@ -10,14 +10,20 @@ class Photo {
     localStorage.setItem('photos', JSON.stringify(array));
   }
 
-  // deleteFromStorage() {
-
-  // }
-
   updatePhoto(album) {
     var index = album.indexOf(this)
     album.splice(index, 1, this);
     this.saveToStorage(album);
   }
+
+  // deleteFromStorage() {
+  //   var index = albums.indexOf(this)
+  //   albums.splice(index, 1);
+  //   if (this === undefined) {
+  //     albums = [];
+  //     localStorage.clear();
+  //   } else {
+  //     this.saveToStorage(albums);
+  //   }
 }
 
