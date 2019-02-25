@@ -68,9 +68,8 @@ function createImageCard(photo) {
       ${photo.caption}
     </textarea>
     <footer class=image-card-buttons>
-    <button class='delete-btn'><img src="images/delete.svg" alt="Trash Can"></button>
-    <button class='active-fav-btn'><img src="" alt="Heart"
-    <button class='fav-btn'><img src="images/favorite.svg" alt="Heart"></button>
+    <div class="trash-btn"></div>
+    <div class="favorite-btn"></div>
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
@@ -107,9 +106,10 @@ function saveCardChanges(e) {
     var index = getPhotoIndex(e);
     var photo = reinstantiatePhoto(album, index);
     if (e.target.classList.contains('card-title')) {
-      photo.title = e.target.innerText;
-    } else {
-      photo.caption = e.target.innerText;
+      photo.title = e.target.value;
+    }
+    if (e.target.classList.contains('card-caption')) {
+      photo.caption = e.target.value;
     }
     photo.updatePhoto(album);
   }
