@@ -184,7 +184,15 @@ function viewFavorites() {
   photoGallery.innerHTML = '';
   for (var i = 0; i < favorites.length; i++) {
     createImageCard(favorites[i]);
+    replaceViewBtnText();
   }
+}
+
+function replaceViewBtnText() {
+  var viewBtnNumber = document.getElementById('number');
+  viewBtnNumber.innerText = '';
+  var viewBtnText = document.querySelector('.view-favorites-btn');
+  viewBtnText.innerText = 'View All';
 }
 
 function updateFavoritesButton() {
