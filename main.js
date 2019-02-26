@@ -6,7 +6,7 @@ var imageTitle = document.querySelector('#title');
 var titleContent = document.getElementsByClassName('card-title');
 var imageCaption = document.querySelector('#caption');
 var captionContent = document.querySelectorAll('.card-caption');
-var favoriteBtn = document.querySelector('view-favorities-btn');
+var favoriteBtn = document.querySelector('.view-favorites-btn');
 var imageUpload = document.querySelector('.choose-file-input');
 var showAllBtns = document.querySelector('.show-moreless-btn');
 var searchInput = document.querySelector('.search-bar-input');
@@ -26,6 +26,7 @@ photoGallery.addEventListener('focusout', updateText);
 photoGallery.addEventListener('click', cardClick);
 showAllBtns.addEventListener('click', showAll);
 searchInput.addEventListener('input', searchImages);
+favoriteBtn.addEventListener('click', viewFavorites);
 // showMoreBtn.addEventListener('click', showMoreButton);
 // showLessBtn.addEventListener('click', showLessButton);
 
@@ -172,19 +173,27 @@ function addFavorite(currentCard, cardId, e) {
   updateFavoritesClass(e);
 }
 
-function viewFavorites() {
+function getFavorites() {
   return album.filter(function(photo){
     return photo.favorite === true;
   });
 }
 
+function viewFavorites() {
+  var favorites = getFavorites();
+  photoGallery.innerHTML = '';
+  for (var i = 0; i < favorites.length; i++) {
+    createImageCard(favorites[i]);
+  }
+}
+
 function updateFavoritesButton() {
   var update = document.getElementById('number');
-  update.innerText = viewFavorites().length;
+  update.innerText = getFavorites().length;
 }
 
   function updateFavoritesClass(e) {
-        e.target.classList.toggle('favorite-btn-active');
+    e.target.classList.toggle('favorite-btn-active');
 }
 
 function disableAddAlbumBtn() {
@@ -228,7 +237,6 @@ function searchImages() {
     createImageCard(results[i]);
   }
 }
-
 
 
 
