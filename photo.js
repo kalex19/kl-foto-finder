@@ -11,30 +11,30 @@ class Photo {
     localStorage.setItem('photos', JSON.stringify(array));
   }
 
-  updatePhoto(album) {
-    var index = album.indexOf(this)
+  updatePhoto(album, index) {
     album.splice(index, 1, this);
     this.saveToStorage(album);
   }
 
-  favoritePhoto() {
-    if (this.favorite === true) {
-      this.favorite = false;
+  updateInput(album,text,label) {
+    if (label === 'title') {
+      this.title = text;
     } else {
-      this.favorite = true;
+      this.caption = text;
     }
     this.saveToStorage(album);
   }
 
-   deleteFromStorage() {
-    var index = album.indexOf(this)
-    album.splice(index, 1);
-    if (this === undefined) {
-      album = [];
-      localStorage.clear();
-    } else {
-      this.saveToStorage(album);
-    }
+
+  favoritePhoto(album) {
+    this.favorite = !this.favorite;
+    this.saveToStorage(album);
+  }
+
+   deleteFromStorage(album) {
+    album.splice(album.indexOf(this), 1);
+    this.saveToStorage(album);
+    
 }
 
 }
