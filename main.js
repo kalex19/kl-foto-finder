@@ -7,22 +7,23 @@ var titleContent = document.getElementsByClassName('card-title');
 var imageCaption = document.querySelector('#caption');
 var captionContent = document.querySelectorAll('.card-caption');
 var favoriteBtn = document.querySelector('view-favorities-btn');
+var imageUpload = document.querySelector('.choose-file-input');
 var reader = new FileReader();
 
 
 //EVENT LISTENERS
 addToAlbumBtn.addEventListener('click', createURL);
+imageTitle.addEventListener('input', disableAddAlbumBtn );
+imageCaption.addEventListener('input', disableAddAlbumBtn);
+imageUpload.addEventListener('input', disableAddAlbumBtn);
 photoGallery.addEventListener('keypress', blurContent);
 photoGallery.addEventListener('focusout', updateText);
-// photoGallery.addEventListener('mouseover', editDeleteButton);
-// photoGallery.addEventListener('mouseout', editDeleteButtonActive);
 photoGallery.addEventListener('click', cardClick);
-// favoriteBtn.addEventListener('click', favoriteButtonFilter);
+
 
 
 
 //FUNCTIONS()
-
 window.onload = function() {
   loadImg(album);
   updateFavoritesButton(); 
@@ -45,9 +46,8 @@ function loadImg(photos) {
 }
 
 function createURL(album) {
-  var imgInput = document.querySelector('.choose-file-input');
-  if (imgInput.files[0]) {
-    reader.readAsDataURL(imgInput.files[0]); 
+  if (imageUpload.files[0]) {
+    reader.readAsDataURL(imageUpload.files[0]); 
     reader.onload = addImgToAlbum
   } 
 }
@@ -117,21 +117,6 @@ function saveCardChanges(e) {
     photo.updatePhoto(album, index);
   }
 
-function editDeleteButton(e) {
-  if (e.target.classList.contains('delete-btn-container')) {
-    e.target.classList.add('delete-btn-active');
-    e.target.classList.remove('delete-btn'); 
-   } 
-}
-
-function editDeleteButtonActive(e) {
-  if (e.target.classList.contains('delete-btn-container')) {
-    e.target.classList.remove('delete-btn-active');
-    e.target.classList.add('delete-btn'); 
-   } 
-}
-
-//used for many functions
 function cardClick(e) {
   var currentCard = e.target.closest('.image-card');
   var cardId = parseInt(currentCard.dataset.id);
@@ -171,14 +156,6 @@ function removeCard(currentCard, cardId) {
     targetPhoto.deleteFromStorage(album); 
 }
 
-// function updateText(currentCard, cardTarget) {
-//   console.log(album);
-//   var targetPhoto = findCard(currentCard);
-//   targetPhoto.blurContent();
-//   targetPhoto.saveCardChanges();
-// }
-
-
 function addFavorite(currentCard, cardId, e) {
   var targetPhoto = findCard(currentCard, cardId);
   targetPhoto.favoritePhoto(album);
@@ -201,32 +178,14 @@ function updateFavoritesButton() {
         e.target.classList.toggle('favorite-btn-active');
 }
 
+function disableAddAlbumBtn() {
+  if (imageTitle.value && imageCaption.value && imageUpload.files[0]) {
+      addToAlbumBtn.disabled = false;
+  } else {
+      addToAlbumBtn.disabled = true;
+  }
+}
 
-//if button favorite = true
-//filter results 
-
-// function favoriteButtonFilter() {
-//   var trueCount = album.filter(function(photo){
-//         return photo.favorite === true;
-//   if (photo.favorite === true;) {
-
-//  } else {
-
-//  }
-// }
-
-// function searchCards(e) {
-//   var currentSearch = e.target.value;
-//   var regex = new RegExp(currentSearch, 'i');
-//   var cardMatches = [];
-//   removeCards();
-//   for (let i = 0; i < photos.length; i++) {
-//     if (regex.test(photos[i].title) || regex.test(photos[i].caption)) {
-//       catdMatches.push(photos[i]);
-//       createImageCard(photos[i]);
-//     }
-//   }
-// }
  
 
 

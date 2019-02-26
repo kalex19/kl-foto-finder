@@ -132,6 +132,10 @@ textarea:focus {
   margin-left: 40px;
 }
 
+.add-to-album-btn:disabled {
+  background-color: red;
+}
+
 .image-card-container {
   display: flex;
   flex-wrap: wrap;
@@ -175,14 +179,13 @@ textarea:focus {
   justify-content: space-between; 
 }
 
-.delete-btn {
+.delete-btn-icon {
   content: url(images/delete.svg);
   margin: 0 20px;
 }
 
-.delete-btn-active {
-  content: url(images/delete-active.svg);
-  margin: 0 20px;
+.delete-btn-icon:hover {
+ content: url(images/delete-active.svg);
 }
 
 .favorite-btn {
