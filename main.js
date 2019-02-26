@@ -160,7 +160,19 @@ function addFavorite(currentCard) {
   console.log(album);
    var targetCard = findCard(currentCard);
    targetCard.favoritePhoto();
+   updateFavoritesButton(); 
 }
+
+  function updateFavoritesButton() {
+    var update = document.getElementById('number');
+    var trueCount = album.filter(function(photo){
+        return photo.favorite === true;
+    });
+    update.innerText = trueCount.length;
+  }
+  
+
+
 
 
 
