@@ -1,10 +1,10 @@
 class Photo {
-  constructor(title,caption, upload, id) {
+  constructor(title,caption, upload, id, favorite) {
     this.title = title
     this.caption = caption
     this.upload = upload;
     this.id = id;
-    this.favorite = false;
+    this.favorite = favorite || false;
   }
 
   saveToStorage(array) {
@@ -23,6 +23,7 @@ class Photo {
     } else {
       this.favorite = true;
     }
+    this.saveToStorage(album);
   }
 
    deleteFromStorage() {

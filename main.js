@@ -21,6 +21,8 @@ photoGallery.addEventListener('click', cardClick);
 
 window.onload = function() {
   loadImg(album);
+  console.log(album);
+  updateFavoritesButton(); 
   for(var i = 0; i < titleContent.length; i++) {
     titleContent[i].addEventListener('blur', saveCardChanges);
   }
@@ -49,7 +51,7 @@ function createURL(album) {
 
 function reinstantiatePhoto(photos, i) {
   
-   return new Photo(photos[i].title, photos[i].caption, photos[i].upload, photos[i].id);
+   return new Photo(photos[i].title, photos[i].caption, photos[i].upload, photos[i].id, photos[i].favorite);
 }
 
 function addImgToAlbum(e) {
@@ -60,6 +62,7 @@ function addImgToAlbum(e) {
 }
 
 function createImageCard(photo) {
+  var favClass = photo.favorite ? 'favorite-btn-active' : 'favorite-btn';
   var imageContainer = document.querySelector('.image-card-container');
   var imageCard = 
   `<section class="image-card" id="${photo.id}">
@@ -72,7 +75,7 @@ function createImageCard(photo) {
     </textarea>
     <footer class="image-card-buttons">
     <div data-id="${photo.id}" class="delete-btn-container delete-btn"></div>
-    <div data-id="${photo.id}" class="favorite-btn-container favorite-btn"></div>
+    <div data-id="${photo.id}" class="favorite-btn-container ${favClass}"></div>
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
@@ -139,7 +142,7 @@ function cardClick(e) {
   if (cardTarget.classList.contains('delete-btn-container')) {
     removeCard(currentCard);
   } else if (cardTarget.classList.contains('favorite-btn-container')) {
-    addFavorite(currentCard);
+    addFavorite(currentCard, cardTarget);
   }
 }
 
@@ -156,11 +159,12 @@ function removeCard(currentCard) {
     targetCard.deleteFromStorage();
 }
 
-function addFavorite(currentCard) {
+function addFavorite(currentCard, cardTarget) {
   console.log(album);
-   var targetCard = findCard(currentCard);
-   targetCard.favoritePhoto();
-   updateFavoritesButton(); 
+  var targetCard = findCard(currentCard);
+  targetCard.favoritePhoto();
+  updateFavoritesButton(); 
+  updateFavoritesClass(cardTarget);
 }
 
   function updateFavoritesButton() {
@@ -170,7 +174,18 @@ function addFavorite(currentCard) {
     });
     update.innerText = trueCount.length;
   }
-  
+
+  function updateFavoritesClass(cardTarget) {
+        console.log(cardTarget);
+    if (cardTarget.classList.contains('favorite-btn-active')) {
+        cardTarget.classList.remove('favorite-btn-active');
+        cardTarget.classList.add('favorite-btn');
+      } else {
+         cardTarget.classList.remove('favorite-btn');
+         cardTarget.classList.add('favorite-btn-active');
+ }
+}
+
 
 
 
