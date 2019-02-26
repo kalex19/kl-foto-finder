@@ -8,6 +8,11 @@ var imageCaption = document.querySelector('#caption');
 var captionContent = document.querySelectorAll('.card-caption');
 var favoriteBtn = document.querySelector('view-favorities-btn');
 var imageUpload = document.querySelector('.choose-file-input');
+var showAllBtns = document.querySelector('.show-moreless-btn');
+var searchInput = document.querySelector('.search-bar-input');
+// var showMoreBtn = document.querySelector('.show-more-btn');
+// var showLessBtn = document.querySelector('.show-less-btn');
+// var imageCount = 0;
 var reader = new FileReader();
 
 
@@ -19,8 +24,10 @@ imageUpload.addEventListener('input', disableAddAlbumBtn);
 photoGallery.addEventListener('keypress', blurContent);
 photoGallery.addEventListener('focusout', updateText);
 photoGallery.addEventListener('click', cardClick);
-
-
+showAllBtns.addEventListener('click', showAll);
+searchInput.addEventListener('input', searchImages);
+// showMoreBtn.addEventListener('click', showMoreButton);
+// showLessBtn.addEventListener('click', showLessButton);
 
 
 //FUNCTIONS()
@@ -49,7 +56,7 @@ function createURL(album) {
   if (imageUpload.files[0]) {
     reader.readAsDataURL(imageUpload.files[0]); 
     reader.onload = addImgToAlbum
-  } 
+  }
 }
 
 function reinstantiatePhoto(photos, i) {
@@ -81,6 +88,8 @@ function createImageCard(photo) {
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
+ 
+
 }
 
 function appendPhotos() {
@@ -186,8 +195,39 @@ function disableAddAlbumBtn() {
   }
 }
 
- 
+function showAll() {
+  if (showMoreButton.classList.contains('hide-me')) {
+  showMoreButton.classList.remove('hide-me');
+  showLessButton.classList.add('hide-me'); 
+  } else {
+  showLessButton.classList.remove('hide-me');
+  showMoreButton.classList.add('hide-me'); 
+  }
+}
 
+// function showMoreButton() {
+//   imageCount = 50;
+//   for (let i = 0; i < album.length; i++) {
+//     createCardImage(album[i]);
+//   }
+// }
+
+// function showLessButton() {
+//   imageCount = 10;
+//   for (let i = 0; i < album.length; i++) {
+//     createCardImage(albums[i]);
+//   }
+// }
+
+function searchImages() {
+  var results = album.filter(function(photo){
+    return photo.title.includes(searchInput.value) || photo.caption.includes(searchInput.value);
+   }); 
+    photoGallery.innerHTML = '';
+  for (var i = 0; i < results.length; i++) {
+    createImageCard(results[i]);
+  }
+}
 
 
 

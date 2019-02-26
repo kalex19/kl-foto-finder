@@ -133,7 +133,7 @@ textarea:focus {
 }
 
 .add-to-album-btn:disabled {
-  background-color: red;
+  background-color: #938284;
 }
 
 .image-card-container {
