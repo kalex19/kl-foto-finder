@@ -14,8 +14,8 @@ var reader = new FileReader();
 //EVENT LISTENERS
 addToAlbumBtn.addEventListener('click', createURL);
 photoGallery.addEventListener('keypress', blurContent);
-favortiteBtn.addEventListener('click', favoriteButton);
-favortiteBtnActive.addEventListener('click', favoriteButton);
+// favortiteBtn.addEventListener('click', favoriteButton);
+// favortiteBtnActive.addEventListener('click', favoriteButton);
 
 //FUNCTIONS()
 
@@ -60,17 +60,16 @@ function createImageCard(photo) {
   var imageContainer = document.querySelector('.image-card-container');
   var imageCard = 
   `<section class="image-card" data-id="${photo.id}">
-    <h2 class="card-title" contenteditable>
+    <textarea class="card-title" contenteditable>
       ${photo.title}
-    </h2>
+    </textarea>
     <img src="${photo.upload}" alt="Uploaded Image">
-    <p class="card-caption" contenteditable>
+    <textarea class="card-caption" contenteditable>
       ${photo.caption}
-    </p>
+    </textarea>
     <footer class=image-card-buttons>
-    <button class='delete-btn'><img src="images/delete.svg" alt="Trash Can"></button>
-    <button class='active-fav-btn'><img src="" alt="Heart"
-    <button class='fav-btn'><img src="images/favorite.svg" alt="Heart"></button>
+    <div class="trash-btn"></div>
+    <div class="favorite-btn"></div>
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
@@ -107,18 +106,19 @@ function saveCardChanges(e) {
     var index = getPhotoIndex(e);
     var photo = reinstantiatePhoto(album, index);
     if (e.target.classList.contains('card-title')) {
-      photo.title = e.target.innerText;
-    } else {
-      photo.caption = e.target.innerText;
+      photo.title = e.target.value;
+    }
+    if (e.target.classList.contains('card-caption')) {
+      photo.caption = e.target.value;
     }
     photo.updatePhoto(album);
   }
     
-function favoriteButton() {
-  var buttonActiveSwitch = document.classList('fav-btn');
-    if(buttonActiveSwitch){ element.classList.toggle('active-fav-btn')
-    }
-  var buttonDisabledSwitch = document.classList('active-fav-btn');
-     if(buttonActiveSwitch){ element.classList.toggle('fav-btn')
-    }
-}
+// function favoriteButton() {
+//   var buttonActiveSwitch = document.classList('fav-btn');
+//     if(buttonActiveSwitch){ element.classList.toggle('active-fav-btn')
+//     }
+//   var buttonDisabledSwitch = document.classList('active-fav-btn');
+//      if(buttonActiveSwitch){ element.classList.toggle('fav-btn')
+//     }
+// }
