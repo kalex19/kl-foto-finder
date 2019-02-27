@@ -238,24 +238,22 @@ function showAll() {
 }
 
 function searchImages() { 
-  // if (viewBtnText.innerText === 'All') {
-  //   searchFavImages();
-  // } else {
+  if (viewBtnText.innerText === 'All') {
+    searchFavImages();
+  } else {
     searchAllImages();
   }
+}
 
-
-// function searchFavImages() {
-//   console.log('happy');
-//   var results = album.filter(function(photo){
-//     return photo.title.includes(searchInput.value) || photo.caption.includes(searchInput.value);
-//     console.log(results);
-//   });
-//   photoGallery.innerHTML = '';
-//   for (var i = 0; i < results.length; i++) {
-//     createImageCard(results[i]);
-//   } 
-// }
+function searchFavImages() {
+  var results = getFavoriteImages().filter(function(photo){
+    return photo.title.includes(searchInput.value) || photo.caption.includes(searchInput.value) ;
+  });
+  photoGallery.innerHTML = '';
+  for (var i = 0; i < results.length; i++) {
+    createImageCard(results[i]);
+  } 
+}
 
 function searchAllImages() {
   var results = album.filter(function(photo){
