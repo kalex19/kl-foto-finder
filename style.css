@@ -140,6 +140,13 @@ span {
   background-color: #938284;
 }
 
+.addPhoto {
+  text-align: center;
+  font-size: 50px;
+  color: #938284;
+  width: 100%;
+}
+
 .image-card-container {
   display: flex;
   flex-wrap: wrap;
@@ -207,6 +214,7 @@ span {
   width: 100%;
   grid-template-columns: 50% auto;
 }
+
 
 
 

@@ -55,7 +55,7 @@ function createURL(album) {
   if (imageUpload.files[0]) {
     reader.readAsDataURL(imageUpload.files[0]); 
     reader.onload = addImgToAlbum
-  }
+  } 
 }
 
 function reinstantiatePhoto(photos, i) {
@@ -87,7 +87,8 @@ function createImageCard(photo) {
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
-  addPhotoTextOn();
+   addPhotoTextOn();
+   clearFields();
 }
 
 function addPhotoTextOn() {
@@ -100,14 +101,16 @@ function addPhotoTextOff() {
   noPhotoText.classList.remove('hide-me');
 }
 
-function appendPhotos() {
-  album.forEach(function (photo) {
-    createImageCard(photo);
-  })
-  clearFields();
-}
+//Is this doing anything??
+// function appendPhotos() {
+//   album.forEach(function (photo) {
+//     createImageCard(photo);
+//   })
+//   clearFields();
+// }
 
 function clearFields() {
+
   imageTitle.value = '';
   imageCaption.value = '';
 }
@@ -170,7 +173,7 @@ function findCard(currentCard, cardId) {
 function removeCard(currentCard, cardId) {
     currentCard.remove();
     var targetPhoto = findCard(currentCard, cardId);
-    targetPhoto.deleteFromStorage(album);
+    targetPhoto.deleteFromStorage(album); 
     addPhotoTextOff();
 }
 
@@ -238,7 +241,7 @@ function disableAddAlbumBtn() {
   } else {
       addToAlbumBtn.disabled = true;
   }
-}
+} 
 
 function searchImages() { 
   if (viewBtnText.innerText === 'All') {
