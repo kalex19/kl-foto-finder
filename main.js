@@ -6,23 +6,30 @@ var imageTitle = document.querySelector('#title');
 var titleContent = document.getElementsByClassName('card-title');
 var imageCaption = document.querySelector('#caption');
 var captionContent = document.querySelectorAll('.card-caption');
-var favoriteBtn = document.querySelector('view-favorities-btn');
+var favoriteBtn = document.querySelector('.view-favorites-btn');
+var imageUpload = document.querySelector('.choose-file-input');
+var showAllBtns = document.querySelector('.show-moreless-btn');
+var searchInput = document.querySelector('.search-bar-input');
+var viewBtnText = document.getElementById('all-favorite');
+var update = document.getElementById('number');
 var reader = new FileReader();
 
 
 //EVENT LISTENERS
 addToAlbumBtn.addEventListener('click', createURL);
+imageTitle.addEventListener('input', disableAddAlbumBtn );
+imageCaption.addEventListener('input', disableAddAlbumBtn);
+imageUpload.addEventListener('input', disableAddAlbumBtn);
 photoGallery.addEventListener('keypress', blurContent);
 photoGallery.addEventListener('focusout', updateText);
-// photoGallery.addEventListener('mouseover', editDeleteButton);
-// photoGallery.addEventListener('mouseout', editDeleteButtonActive);
 photoGallery.addEventListener('click', cardClick);
-// favoriteBtn.addEventListener('click', favoriteButtonFilter);
+// showAllBtns.addEventListener('click', showAll);
+searchInput.addEventListener('input', searchImages);
+favoriteBtn.addEventListener('click', viewFavoritesBtn);
 
 
 
 //FUNCTIONS()
-
 window.onload = function() {
   loadImg(album);
   updateFavoritesButton(); 
@@ -45,9 +52,8 @@ function loadImg(photos) {
 }
 
 function createURL(album) {
-  var imgInput = document.querySelector('.choose-file-input');
-  if (imgInput.files[0]) {
-    reader.readAsDataURL(imgInput.files[0]); 
+  if (imageUpload.files[0]) {
+    reader.readAsDataURL(imageUpload.files[0]); 
     reader.onload = addImgToAlbum
   } 
 }
@@ -81,16 +87,30 @@ function createImageCard(photo) {
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
+   addPhotoTextOn();
+   clearFields();
 }
 
-function appendPhotos() {
-  album.forEach(function (photo) {
-    createImageCard(photo);
-  })
-  clearFields();
+function addPhotoTextOn() {
+  var noPhotoText = document.querySelector('.addPhoto');
+  noPhotoText.classList.add('hide-me');
 }
+
+function addPhotoTextOff() {
+  var noPhotoText = document.querySelector('.addPhoto');
+  noPhotoText.classList.remove('hide-me');
+}
+
+//Is this doing anything??
+// function appendPhotos() {
+//   album.forEach(function (photo) {
+//     createImageCard(photo);
+//   })
+//   clearFields();
+// }
 
 function clearFields() {
+
   imageTitle.value = '';
   imageCaption.value = '';
 }
@@ -117,21 +137,6 @@ function saveCardChanges(e) {
     photo.updatePhoto(album, index);
   }
 
-function editDeleteButton(e) {
-  if (e.target.classList.contains('delete-btn-container')) {
-    e.target.classList.add('delete-btn-active');
-    e.target.classList.remove('delete-btn'); 
-   } 
-}
-
-function editDeleteButtonActive(e) {
-  if (e.target.classList.contains('delete-btn-container')) {
-    e.target.classList.remove('delete-btn-active');
-    e.target.classList.add('delete-btn'); 
-   } 
-}
-
-//used for many functions
 function cardClick(e) {
   var currentCard = e.target.closest('.image-card');
   var cardId = parseInt(currentCard.dataset.id);
@@ -169,15 +174,8 @@ function removeCard(currentCard, cardId) {
     currentCard.remove();
     var targetPhoto = findCard(currentCard, cardId);
     targetPhoto.deleteFromStorage(album); 
+    addPhotoTextOff();
 }
-
-// function updateText(currentCard, cardTarget) {
-//   console.log(album);
-//   var targetPhoto = findCard(currentCard);
-//   targetPhoto.blurContent();
-//   targetPhoto.saveCardChanges();
-// }
-
 
 function addFavorite(currentCard, cardId, e) {
   var targetPhoto = findCard(currentCard, cardId);
@@ -186,50 +184,102 @@ function addFavorite(currentCard, cardId, e) {
   updateFavoritesClass(e);
 }
 
-function viewFavorites() {
+function getFavoriteImages() {
   return album.filter(function(photo){
     return photo.favorite === true;
   });
 }
 
 function updateFavoritesButton() {
-  var update = document.getElementById('number');
-  update.innerText = viewFavorites().length;
+  update.innerText = getFavoriteImages().length;
+  viewBtnText.innerText = 'Favorites';
 }
 
   function updateFavoritesClass(e) {
-        e.target.classList.toggle('favorite-btn-active');
+    e.target.classList.toggle('favorite-btn-active');
+}
+
+function viewFavoritesBtn() {
+  searchInput.value = '';
+  if (viewBtnText.innerText === 'All') {
+    viewAllImages();
+    updateFavoritesButton();
+  } else {
+    viewFavorites();
+  }
+}
+
+function viewFavorites() {
+  var favorites = getFavoriteImages();
+  photoGallery.innerHTML = '';
+  for (var i = 0; i < favorites.length; i++) {
+    createImageCard(favorites[i]);
+    replaceViewBtnText();
+  }
+}
+
+function replaceViewBtnText() {
+  viewBtnText.innerText = 'All';
+  update.innerText = ''; 
 }
 
 
-//if button favorite = true
-//filter results 
+function viewAllImages(){
+ var results = album.filter(function(photo){
+    return photo;
+  });
+    photoGallery.innerHTML = '';
+  for (var i = 0; i < results.length; i++) {
+    createImageCard(results[i]);
+  } 
+}
 
-// function favoriteButtonFilter() {
-//   var trueCount = album.filter(function(photo){
-//         return photo.favorite === true;
-//   if (photo.favorite === true;) {
 
-//  } else {
+function disableAddAlbumBtn() {
+  if (imageTitle.value && imageCaption.value && imageUpload.files[0]) {
+      addToAlbumBtn.disabled = false;
+  } else {
+      addToAlbumBtn.disabled = true;
+  }
+} 
 
-//  }
-// }
+function searchImages() { 
+  if (viewBtnText.innerText === 'All') {
+    searchFavImages();
+  } else {
+    searchAllImages();
+  }
+}
 
-// function searchCards(e) {
-//   var currentSearch = e.target.value;
-//   var regex = new RegExp(currentSearch, 'i');
-//   var cardMatches = [];
-//   removeCards();
-//   for (let i = 0; i < photos.length; i++) {
-//     if (regex.test(photos[i].title) || regex.test(photos[i].caption)) {
-//       catdMatches.push(photos[i]);
-//       createImageCard(photos[i]);
-//     }
+function searchFavImages() {
+  var results = getFavoriteImages().filter(function(photo){
+    return photo.title.includes(searchInput.value) || photo.caption.includes(searchInput.value) ;
+  });
+  photoGallery.innerHTML = '';
+  for (var i = 0; i < results.length; i++) {
+    createImageCard(results[i]);
+  } 
+}
+
+function searchAllImages() {
+  var results = album.filter(function(photo){
+    return photo.title.includes(searchInput.value) || photo.caption.includes(searchInput.value);
+   }); 
+    photoGallery.innerHTML = '';
+  for (var i = 0; i < results.length; i++) {
+    createImageCard(results[i]);
+  }
+}
+
+//function showAll() {
+//   if (showMoreButton.classList.contains('hide-me')) {
+//   showMoreButton.classList.remove('hide-me');
+//   showLessButton.classList.add('hide-me'); 
+//   } else {
+//   showLessButton.classList.remove('hide-me');
+//   showMoreButton.classList.add('hide-me'); 
 //   }
 // }
- 
-
-
 
 
 

@@ -128,8 +128,23 @@ textarea:focus {
   border: 0px solid;
 }
 
+span {
+  margin: 3px;
+}
+
 .add-to-album-btn {
   margin-left: 40px;
+}
+
+.add-to-album-btn:disabled {
+  background-color: #938284;
+}
+
+.addPhoto {
+  text-align: center;
+  font-size: 50px;
+  color: #938284;
+  width: 100%;
 }
 
 .image-card-container {
@@ -175,14 +190,13 @@ textarea:focus {
   justify-content: space-between; 
 }
 
-.delete-btn {
+.delete-btn-icon {
   content: url(images/delete.svg);
   margin: 0 20px;
 }
 
-.delete-btn-active {
-  content: url(images/delete-active.svg);
-  margin: 0 20px;
+.delete-btn-icon:hover {
+ content: url(images/delete-active.svg);
 }
 
 .favorite-btn {
@@ -200,6 +214,7 @@ textarea:focus {
   width: 100%;
   grid-template-columns: 50% auto;
 }
+
 
 
 
