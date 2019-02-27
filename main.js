@@ -23,7 +23,7 @@ imageUpload.addEventListener('input', disableAddAlbumBtn);
 photoGallery.addEventListener('keypress', blurContent);
 photoGallery.addEventListener('focusout', updateText);
 photoGallery.addEventListener('click', cardClick);
-showAllBtns.addEventListener('click', showAll);
+// showAllBtns.addEventListener('click', showAll);
 searchInput.addEventListener('input', searchImages);
 favoriteBtn.addEventListener('click', viewFavoritesBtn);
 
@@ -87,6 +87,17 @@ function createImageCard(photo) {
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
+  addPhotoTextOn();
+}
+
+function addPhotoTextOn() {
+  var noPhotoText = document.querySelector('.addPhoto');
+  noPhotoText.classList.add('hide-me');
+}
+
+function addPhotoTextOff() {
+  var noPhotoText = document.querySelector('.addPhoto');
+  noPhotoText.classList.remove('hide-me');
 }
 
 function appendPhotos() {
@@ -159,7 +170,8 @@ function findCard(currentCard, cardId) {
 function removeCard(currentCard, cardId) {
     currentCard.remove();
     var targetPhoto = findCard(currentCard, cardId);
-    targetPhoto.deleteFromStorage(album); 
+    targetPhoto.deleteFromStorage(album);
+    addPhotoTextOff();
 }
 
 function addFavorite(currentCard, cardId, e) {
@@ -228,16 +240,6 @@ function disableAddAlbumBtn() {
   }
 }
 
-function showAll() {
-  if (showMoreButton.classList.contains('hide-me')) {
-  showMoreButton.classList.remove('hide-me');
-  showLessButton.classList.add('hide-me'); 
-  } else {
-  showLessButton.classList.remove('hide-me');
-  showMoreButton.classList.add('hide-me'); 
-  }
-}
-
 function searchImages() { 
   if (viewBtnText.innerText === 'All') {
     searchFavImages();
@@ -265,6 +267,16 @@ function searchAllImages() {
     createImageCard(results[i]);
   }
 }
+
+//function showAll() {
+//   if (showMoreButton.classList.contains('hide-me')) {
+//   showMoreButton.classList.remove('hide-me');
+//   showLessButton.classList.add('hide-me'); 
+//   } else {
+//   showLessButton.classList.remove('hide-me');
+//   showMoreButton.classList.add('hide-me'); 
+//   }
+// }
 
 
 
