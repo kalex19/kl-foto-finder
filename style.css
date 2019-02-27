@@ -136,6 +136,8 @@ textarea:focus {
   display: flex;
   flex-wrap: wrap;
   background-color: #c2b2b4;
+  padding: 0 70px;
+  height: 1000px;
 
 }
 
@@ -144,7 +146,7 @@ textarea:focus {
   display: grid;
   grid-template-rows: 15% auto 15% 20%;
   height: 400px;
-  margin: 40px 70px;
+  margin: 40px 20px;
   color: #3e2a35;
   background-color: #fff;
 }
@@ -152,9 +154,8 @@ textarea:focus {
 .card-title {
   resize: none;
   border: 0px solid;
-  font-weight: 800;
-  font-size: 1em;
-  margin-top: 10px;
+  font-size: 1.2em;
+  margin: 10px;
 }
 
 .image-card img {
@@ -165,7 +166,7 @@ textarea:focus {
 .card-caption {
   resize: none;
   border: 0px solid;
-  margin-top: 5px;
+  margin: 10px;
 }
 
 .image-card-buttons {
@@ -174,12 +175,12 @@ textarea:focus {
   justify-content: space-between; 
 }
 
-.trash-btn {
+.delete-btn {
   content: url(images/delete.svg);
   margin: 0 20px;
 }
 
-.trash-btn-active {
+.delete-btn-active {
   content: url(images/delete-active.svg);
   margin: 0 20px;
 }
