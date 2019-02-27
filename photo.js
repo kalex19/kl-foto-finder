@@ -1,7 +1,7 @@
 class Photo {
-  constructor(title,caption, upload, id, favorite) {
-    this.title = title
-    this.caption = caption
+  constructor(title, caption, upload, id, favorite) {
+    this.title = title;
+    this.caption = caption;
     this.upload = upload;
     this.id = id;
     this.favorite = favorite || false;
@@ -31,11 +31,10 @@ class Photo {
     this.saveToStorage(album);
   }
 
-   deleteFromStorage(album) {
+  deleteFromStorage(album) {
     album.splice(album.indexOf(this), 1);
     this.saveToStorage(album);
     
-}
-
+  }
 }
 
