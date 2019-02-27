@@ -75,7 +75,7 @@ function createImageCard(photo) {
   var imageContainer = document.querySelector('.image-card-container');
   var imageCard = 
   `<section class="image-card" data-id="${photo.id}">
-    <textarea class="card-title" contenteditable type="text" maxlength="40">
+    <textarea class="card-title" contenteditable type="text" maxlength="25" style="overflow:hidden">
       ${photo.title}
     </textarea>
     <img src="${photo.upload}" alt="Uploaded Image" class="update-img">
@@ -94,11 +94,11 @@ function createImageCard(photo) {
 }
 
 function addPhotoTextOn() {
-  var noPhotoText = document.getElementById('add-photo').classList.add('.hide-me');
+  var noPhotoText = document.getElementById('add-photo').classList.add('hide-me');
 }
 
 function addPhotoTextOff() {
-  var noPhotoText = document.getElementById('add-photo').classList.remove('.hide-me');
+  var noPhotoText = document.getElementById('add-photo').classList.remove('hide-me');
 }
 
 function clearFields() {
