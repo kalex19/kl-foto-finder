@@ -12,8 +12,6 @@ var showAllBtns = document.querySelector('.show-moreless-btn');
 var searchInput = document.querySelector('.search-bar-input');
 var viewBtnText = document.getElementById('all-favorite');
 var update = document.getElementById('number');
-// var showMoreBtn = document.querySelector('.show-more-btn');
-// var showLessBtn = document.querySelector('.show-less-btn');
 var reader = new FileReader();
 
 
@@ -28,8 +26,7 @@ photoGallery.addEventListener('click', cardClick);
 showAllBtns.addEventListener('click', showAll);
 searchInput.addEventListener('input', searchImages);
 favoriteBtn.addEventListener('click', viewFavoritesBtn);
-// showMoreBtn.addEventListener('click', showMoreButton);
-// showLessBtn.addEventListener('click', showLessButton);
+
 
 
 //FUNCTIONS()
@@ -240,21 +237,27 @@ function showAll() {
   }
 }
 
-// function showMoreButton() {
-//   imageCount = 50;
-//   for (let i = 0; i < album.length; i++) {
-//     createCardImage(album[i]);
-//   }
+function searchImages() { 
+  // if (viewBtnText.innerText === 'All') {
+  //   searchFavImages();
+  // } else {
+    searchAllImages();
+  }
+
+
+// function searchFavImages() {
+//   console.log('happy');
+//   var results = album.filter(function(photo){
+//     return photo.title.includes(searchInput.value) || photo.caption.includes(searchInput.value);
+//     console.log(results);
+//   });
+//   photoGallery.innerHTML = '';
+//   for (var i = 0; i < results.length; i++) {
+//     createImageCard(results[i]);
+//   } 
 // }
 
-// function showLessButton() {
-//   imageCount = 10;
-//   for (let i = 0; i < album.length; i++) {
-//     createCardImage(albums[i]);
-//   }
-// }
-
-function searchImages() {
+function searchAllImages() {
   var results = album.filter(function(photo){
     return photo.title.includes(searchInput.value) || photo.caption.includes(searchInput.value);
    }); 

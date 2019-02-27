@@ -128,6 +128,10 @@ textarea:focus {
   border: 0px solid;
 }
 
+span {
+  margin: 3px;
+}
+
 .add-to-album-btn {
   margin-left: 40px;
 }
