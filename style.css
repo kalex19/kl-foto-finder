@@ -16,7 +16,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 100px;
-  margin: 8px 40px; 
+  margin: 8px 40px;
 }
 
 .homepage-title {
@@ -27,7 +27,7 @@ nav {
 
 .homepage-title img {
   margin: 0;
-  padding: 0px 8px;
+  padding: 0 8px;
 }
 
 .search-bar-and-icon {
@@ -42,8 +42,8 @@ nav {
   padding: 8px;
   background-color: #b2aaab;
   border-radius: 5px/5px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .search-bar-input {
@@ -52,7 +52,7 @@ nav {
   min-width: 400px;
 }
 
-button:focus, 
+button:focus,
 input:focus,
 textarea:focus {
   outline: none;
@@ -77,7 +77,7 @@ textarea:focus {
 
 .title-input,
 .caption-input {
-  margin: 35px 0px;
+  margin: 35px 0;
   height: 65px;
 }
 
@@ -94,7 +94,7 @@ textarea:focus {
   color: #fff;
   background-color: #5b4447;
   display: inline-block;
-  margin: 35px 0px;
+  margin: 35px 0;
   height: 65px;
   font-size: 1.5em;
   width: 100%;
@@ -110,12 +110,12 @@ textarea:focus {
 .show-less-btn {
   color: #fff;
   background-color: #5b4447;
-  margin: 35px 0px;
+  margin: 35px 0;
   height: 65px;
   font-size: 1.5em;
   width: 100%;
   text-align: center;
-  border: 0px solid;
+  border: 0 solid;
 }
 
 .hide-me {
@@ -126,10 +126,10 @@ textarea:focus {
 .add-to-album-btn {
   height: 65px;
   width: 90%;
-  margin: 35px 0px;
+  margin: 35px 0;
   background-color: #5b4447;
   color: #fff;
-  border: 0px solid;
+  border: 0 solid;
 }
 
 span {
@@ -185,7 +185,7 @@ span {
 
 .card-caption {
   resize: none;
-  border: 0px solid;
+  border: 0 solid;
   margin: 10px;
   font-size: 1.5em;
   line-height: 35px;
@@ -194,7 +194,7 @@ span {
 .image-card-buttons {
   background-color: #5b4447;
   display: flex; 
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .delete-btn-icon {
@@ -232,17 +232,8 @@ span {
     font-size: 3.5em;
   }
 
-  /*.search-bar-input {
-    min-height: 72px;
-    min-width: 429px;
-  }
-
-  .search-bar-icon {
-    padding: 24px;
-  }*/
-
   .image-card-creator {
-      grid-auto-columns: 80% auto;
+    grid-auto-columns: 80% auto;
   }
 }
 
@@ -256,19 +247,9 @@ span {
     padding: 0 14px;
   }
 
-  /*.search-bar-and-icon {
-    height: 60px; 
-  }*/
-
-  /*.search-bar-icon {
-    padding: 18px;
-  }*/
-
   .image-card-container {
     padding: 10px;
   }
-
-
 }
 
 @media screen and (max-width: 420px) {
@@ -293,10 +274,3 @@ span {
     width: 50%
   }
 }
-
-
-
-
-
-
-
