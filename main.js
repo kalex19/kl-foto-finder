@@ -10,6 +10,8 @@ var favoriteBtn = document.querySelector('.view-favorites-btn');
 var imageUpload = document.querySelector('.choose-file-input');
 var showAllBtns = document.querySelector('.show-moreless-btn');
 var searchInput = document.querySelector('.search-bar-input');
+var viewBtnText = document.getElementById('all-favorite');
+var update = document.getElementById('number');
 // var showMoreBtn = document.querySelector('.show-more-btn');
 // var showLessBtn = document.querySelector('.show-less-btn');
 var reader = new FileReader();
@@ -177,8 +179,8 @@ function getFavoriteImages() {
 }
 
 function updateFavoritesButton() {
-  var update = document.getElementById('number');
   update.innerText = getFavoriteImages().length;
+  viewBtnText.innerText = 'Favorites';
 }
 
   function updateFavoritesClass(e) {
@@ -186,8 +188,9 @@ function updateFavoritesButton() {
 }
 
 function viewFavoritesBtn() {
-  if (favoriteBtn.innerText === 'View All') {
+  if (viewBtnText.innerText === 'All') {
     viewAllImages();
+    updateFavoritesButton();
   } else {
     viewFavorites();
   }
@@ -203,20 +206,19 @@ function viewFavorites() {
 }
 
 function replaceViewBtnText() {
-  favoriteBtn.innerText = 'View All'; 
+  viewBtnText.innerText = 'All';
+  update.innerText = ''; 
 }
 
 
 function viewAllImages(){
-  console.log('success');
  var results = album.filter(function(photo){
     return photo;
   });
     photoGallery.innerHTML = '';
   for (var i = 0; i < results.length; i++) {
     createImageCard(results[i]);
-    // updateFavoritesButton();
-  }
+  } 
 }
 
 
