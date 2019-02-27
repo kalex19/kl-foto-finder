@@ -1,7 +1,23 @@
-// A photo.js file that contains a Photo class.
-// Photo methods must include, but are not limited to:
-// constructor
-// saveToStorage
-// deleteFromStorage
-// updatePhoto
-// A main.js file that contains all dom related javascript.
+class Photo {
+  constructor(title,caption, upload, id) {
+    this.title = title
+    this.caption = caption
+    this.upload = upload;
+    this.id = id;
+  }
+
+  saveToStorage(array) {
+    localStorage.setItem('photos', JSON.stringify(array));
+  }
+
+  // deleteFromStorage() {
+
+  // }
+
+  updatePhoto(album) {
+    var index = album.indexOf(this)
+    album.splice(index, 1, this);
+    this.saveToStorage(album);
+  }
+}
+
