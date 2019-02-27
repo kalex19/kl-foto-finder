@@ -185,6 +185,7 @@ function updateFavoritesButton() {
 }
 
 function viewFavoritesBtn() {
+  searchInput.value = '';
   if (viewBtnText.innerText === 'All') {
     viewAllImages();
     updateFavoritesButton();
