@@ -16,7 +16,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 100px;
-  margin: 8px 40px; 
+  margin: 8px 40px;
 }
 
 .homepage-title {
@@ -27,11 +27,11 @@ nav {
 
 .homepage-title img {
   margin: 0;
-  padding: 0px 8px;
+  padding: 0 8px;
 }
 
 .search-bar-and-icon {
-  font-size: x-large;
+  font-size: 1.5em;
   position: relative;
   display: flex;
   flex-direction: row-reverse;
@@ -40,10 +40,10 @@ nav {
 .search-bar-icon {
   position: absolute;
   padding: 8px;
-  background-color: #938284;
+  background-color: #b2aaab;
   border-radius: 5px/5px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .search-bar-input {
@@ -52,7 +52,7 @@ nav {
   min-width: 400px;
 }
 
-button:focus, 
+button:focus,
 input:focus,
 textarea:focus {
   outline: none;
@@ -70,14 +70,14 @@ textarea:focus {
 .caption-label {
   margin: 0;
   padding: 0;
-  height: 2px;
-  font-size: x-large;
+  height: 4px;
+  font-size: 1.5em;
   color: #c7c4be;
 }
 
 .title-input,
 .caption-input {
-  margin: 35px 0px;
+  margin: 35px 0;
   height: 65px;
 }
 
@@ -94,24 +94,28 @@ textarea:focus {
   color: #fff;
   background-color: #5b4447;
   display: inline-block;
-  margin: 35px 0px;
+  margin: 35px 0;
   height: 65px;
-  font-size: x-large;
+  font-size: 1.5em;
   width: 100%;
   text-align: center;
   padding: 15px;
+}
+
+.show-moreless-btn {
+  margin-bottom: 10px;
 }
 
 .show-more-btn,
 .show-less-btn {
   color: #fff;
   background-color: #5b4447;
-  margin: 35px 0px;
+  margin: 35px 0;
   height: 65px;
-  font-size: x-large;
+  font-size: 1.5em;
   width: 100%;
   text-align: center;
-  border: 0px solid;
+  border: 0 solid;
 }
 
 .hide-me {
@@ -122,10 +126,10 @@ textarea:focus {
 .add-to-album-btn {
   height: 65px;
   width: 90%;
-  margin: 35px 0px;
+  margin: 35px 0;
   background-color: #5b4447;
   color: #fff;
-  border: 0px solid;
+  border: 0 solid;
 }
 
 span {
@@ -150,6 +154,7 @@ span {
 .image-card-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   background-color: #c2b2b4;
   padding: 0 70px;
   height: 1000px;
@@ -159,8 +164,8 @@ span {
 .image-card {
   border: 1px solid #938284;
   display: grid;
-  grid-template-rows: 15% auto 15% 20%;
-  height: 400px;
+  grid-template-rows: 15% auto 25% 15%;
+  height: 480px;
   margin: 40px 20px;
   color: #3e2a35;
   background-color: #fff;
@@ -169,7 +174,7 @@ span {
 .card-title {
   resize: none;
   border: 0px solid;
-  font-size: 1.2em;
+  font-size: 1.5em;
   margin: 10px;
 }
 
@@ -180,14 +185,16 @@ span {
 
 .card-caption {
   resize: none;
-  border: 0px solid;
+  border: 0 solid;
   margin: 10px;
+  font-size: 1.5em;
+  line-height: 35px;
 }
 
 .image-card-buttons {
   background-color: #5b4447;
   display: flex; 
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .delete-btn-icon {
@@ -215,9 +222,55 @@ span {
   grid-template-columns: 50% auto;
 }
 
+@media screen and (max-width: 1300px) {
+  nav {
+    display: grid;
+    justify-content: center;
+  }
 
+  .homepage-title {
+    font-size: 3.5em;
+  }
 
+  .image-card-creator {
+    grid-auto-columns: 80% auto;
+  }
+}
 
+@media screen and (max-width: 770px) {
+  nav {
+    display: block;
+    margin: 0 186px;
+  }
 
+  .homepage-title img {
+    padding: 0 14px;
+  }
 
+  .image-card-container {
+    padding: 10px;
+  }
+}
 
+@media screen and (max-width: 420px) {
+  nav {
+    display: block;
+  }
+
+  .search-bar-input {
+    font-size: 1.5em;
+    width: 90%;
+  }
+
+  .search-bar-icon {
+    padding: 11px;
+  }
+
+  .image-card-container {
+    padding: 0 30px;
+  }
+
+  .image-card {
+    width: 50%
+  }
+}
