@@ -23,7 +23,7 @@ imageUpload.addEventListener('input', disableAddAlbumBtn);
 photoGallery.addEventListener('keypress', blurContent);
 photoGallery.addEventListener('focusout', updateText);
 photoGallery.addEventListener('click', cardClick);
-// showAllBtns.addEventListener('click', showAll);
+showAllBtns.addEventListener('click', showAll);
 searchInput.addEventListener('input', searchImages);
 favoriteBtn.addEventListener('click', viewFavoritesBtn);
 
@@ -52,7 +52,7 @@ function loadImg(photos) {
 }
 
 function createURL(album) {
-  if (imageUpload.files[0]) {
+ if (imageUpload.files[0]) {
     reader.readAsDataURL(imageUpload.files[0]); 
     reader.onload = addImgToAlbum
   } 
@@ -67,6 +67,7 @@ function addImgToAlbum(e) {
     album.push(newPhoto);
     createImageCard(newPhoto);
     newPhoto.saveToStorage(album);
+    imageUpload.value = '';
 }
 
 function createImageCard(photo) {
@@ -74,11 +75,11 @@ function createImageCard(photo) {
   var imageContainer = document.querySelector('.image-card-container');
   var imageCard = 
   `<section class="image-card" data-id="${photo.id}">
-    <textarea class="card-title" contenteditable type="text">
+    <textarea class="card-title" contenteditable type="text" maxlength="40">
       ${photo.title}
     </textarea>
-    <img src="${photo.upload}" alt="Uploaded Image">
-    <textarea class="card-caption" contenteditable type="text">
+    <img src="${photo.upload}" alt="Uploaded Image" class="update-img">
+    <textarea class="card-caption" contenteditable type="text" maxlength="140">
       ${photo.caption}
     </textarea>
     <footer class="image-card-buttons">
@@ -87,30 +88,20 @@ function createImageCard(photo) {
     </footer>
   </section>`
   imageContainer.insertAdjacentHTML('afterbegin',imageCard);
-   addPhotoTextOn();
+   disableAddAlbumBtn();
    clearFields();
+   addPhotoTextOn();
 }
 
 function addPhotoTextOn() {
-  var noPhotoText = document.querySelector('.addPhoto');
-  noPhotoText.classList.add('hide-me');
+  var noPhotoText = document.getElementById('add-photo').classList.add('.hide-me');
 }
 
 function addPhotoTextOff() {
-  var noPhotoText = document.querySelector('.addPhoto');
-  noPhotoText.classList.remove('hide-me');
+  var noPhotoText = document.getElementById('add-photo').classList.remove('.hide-me');
 }
 
-//Is this doing anything??
-// function appendPhotos() {
-//   album.forEach(function (photo) {
-//     createImageCard(photo);
-//   })
-//   clearFields();
-// }
-
 function clearFields() {
-
   imageTitle.value = '';
   imageCaption.value = '';
 }
@@ -144,7 +135,7 @@ function cardClick(e) {
     removeCard(currentCard, cardId);
   } else if (e.target.classList.contains('favorite-btn-icon')) {
     addFavorite(currentCard, cardId, e);
-  } 
+   } 
 }
 
   function updateText(e) {
@@ -271,17 +262,10 @@ function searchAllImages() {
   }
 }
 
-//function showAll() {
-//   if (showMoreButton.classList.contains('hide-me')) {
-//   showMoreButton.classList.remove('hide-me');
-//   showLessButton.classList.add('hide-me'); 
-//   } else {
-//   showLessButton.classList.remove('hide-me');
-//   showMoreButton.classList.add('hide-me'); 
-//   }
-// }
-
-
-
-
+function showAll(e) {
+  var showMoreButton = document.querySelector('.show-more-btn');
+  var showLessButton = document.querySelector('.show-less-btn');
+  showMoreButton.classList.toggle('hide-me');
+  showLessButton.classList.toggle('hide-me');
+}
 
